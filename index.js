@@ -21,6 +21,12 @@ io.on("connection", (socket) => {
         io.emit("alertAll", data);
     });
 
+    socket.on("applist", (data) => {
+        const user = connectedUsers.find((i) => i.id == socket.id);
+        connectedUsers[connectedUsers.indexOf(user)].applist = data;
+        io.emit("connectedUsers", connectedUsers);
+    })
+
 
     socket.on("disconnect", () => {
         console.log("disconnected with socket id", socket.id);
