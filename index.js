@@ -27,6 +27,9 @@ io.on("connection", (socket) => {
         io.emit("connectedUsers", connectedUsers);
     })
 
+    socket.on("requestProgram", (data) => {
+        io.to(data.to).emit("privateMessage", data);
+    });
 
     socket.on("disconnect", () => {
         console.log("disconnected with socket id", socket.id);
