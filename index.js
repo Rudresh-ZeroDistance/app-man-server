@@ -31,6 +31,12 @@ io.on("connection", (socket) => {
         io.to(data.to).emit("privateMessage", data);
     });
 
+    socket.on("computerName", (data) => {
+        const user = connectedUsers.find((i) => i.id == socket.id);
+        connectedUsers[connectedUsers.indexOf(user)].computerName = data;
+        io.emit("connectedUsers", connectedUsers);
+    })
+
     socket.on("disconnect", () => {
         console.log("disconnected with socket id", socket.id);
 
